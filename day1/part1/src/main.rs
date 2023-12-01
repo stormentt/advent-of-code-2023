@@ -20,10 +20,14 @@ fn scan(s: String) -> i32 {
     let mut last = ' ';
 
     for c in s.chars() {
-        if !c.is_digit(10) {continue}
+        if !c.is_digit(10) {
+            continue;
+        }
+
         if first == ' ' {
             first = c;
         }
+
         last = c;
     }
 
