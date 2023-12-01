@@ -31,25 +31,21 @@ fn main() -> io::Result<()> {
 }
 
 fn scan(s: String) -> i32 {
-    let mut first = String::new();
-    let mut last = String::new();
-
-    for v in RE_FORWARD
+    let first = RE_FORWARD
         .find_iter(s.as_str())
-        .map(|m| String::from(m.as_str()))
-    {
-        first = v;
-        break;
-    }
+        .map(|m| m.as_str())
+        .map(|m| String::from(m))
+        .next()
+        .unwrap();
 
     let reversed = reverse(s);
-    for v in RE_BACKWARD
+    let last = RE_BACKWARD
         .find_iter(reversed.as_str())
-        .map(|m| String::from(m.as_str()))
-    {
-        last = reverse(v);
-        break;
-    }
+        .map(|m| m.as_str())
+        .map(|m| String::from(m))
+        .map(|m| reverse(m))
+        .next()
+        .unwrap();
 
     let first = parse(first);
     let last = parse(last);
